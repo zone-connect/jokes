@@ -1,0 +1,26 @@
+{
+    "name": "zc/base",
+    "description": "Base package for zc libraries",
+    "type": "library",
+    "license": "mIT",
+    "authors": [
+        {
+            "name": "Kenny James",
+            "email": "info@zone-connect.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Zc\\Base\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Zc\\Base\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8"
+    }
+}
