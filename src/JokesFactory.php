@@ -1,38 +1,34 @@
 <?php
 namespace Zonec\Base;
 
+use \GuzzleHttp\Client;
+
 /**
  * Jokes Class
  */
 class JokesFactory
 {
+    const API_ENDPOINT = "https://api.chucknorris.io/jokes/random";
+
     /**
-     * Default Jokes
+     * Http Client
      *
-     * @var null
+     * @var Client
      */
-    protected $jokes = [
-        'Chuck Norris threw a grenade and killed 50 people, then it exploded.',
-        'Death once had a near-Chuck-Norris experience.',
-        'Chuck Norris can kill two stones with one bird.'
-    ];
+    protected $httpClient = null;
 
-
-    function __construct(array $jokes = [])
+    function __construct(Client $httpClient = null)
     {
-        if (count($jokes)) {
-            $this->jokes = $jokes;
-        }
-    }
-
-    public function getJokes()
-    {
-        return $this->jokes;
+        $this->httpClient = $httpClient ?: new Client();
     }
 
     public function getRandomJoke()
     {
-        return $this->jokes[array_rand($this->jokes)];
+        $response = $this->httpClient->get(self::API_ENDPOINT);
+
+        $decodedResponse =json_decode($response->getBody()->getContents());
+
+        return $decodedResponse->value;
     }
 }
 ?>
