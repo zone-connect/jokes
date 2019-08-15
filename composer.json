@@ -1,5 +1,5 @@
 {
-    "name": "zc/base",
+    "name": "zonec/base",
     "description": "Base package for zc libraries",
     "type": "library",
     "license": "mIT",
@@ -12,12 +12,12 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Zc\\Base\\": "src/"
+            "Zonec\\Base\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Zc\\Base\\Tests\\": "tests/"
+            "Zonec\\Base\\Tests\\": "tests/"
         }
     },
     "require-dev": {

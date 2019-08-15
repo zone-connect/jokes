@@ -1,5 +1,5 @@
 <?php
-namespace Zc\Base;
+namespace Zonec\Base;
 
 /**
  * Jokes Class
