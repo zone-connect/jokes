@@ -2,7 +2,7 @@
     "name": "zonec/base",
     "description": "Base package for zc libraries",
     "type": "library",
-    "license": "mIT",
+    "license": "MIT",
     "authors": [
         {
             "name": "Kenny James",
