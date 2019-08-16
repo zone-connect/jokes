@@ -23,6 +23,18 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^8"
+        "phpunit/phpunit": "^8",
+        "orchestra/testbench": "^4.0"
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Zonec\\Base\\Providers\\JokesServiceProvider"
+            ],
+            "aliases": {
+                "JokesFactory": "Zonec\\Base\\Facades\\JokesFactoryFacade"
+            }
+        }
     }
 }
