@@ -7,7 +7,7 @@ use \Illuminate\Support\Facades\Facade;
 /**
  * Facade class for JokesFactory class
  */
-class JokesFactoryFacade extends Facade
+class JokesFactory extends Facade
 {
 
     protected static function getFacadeAccessor()

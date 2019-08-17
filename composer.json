@@ -33,7 +33,7 @@
                 "Zonec\\Base\\Providers\\JokesServiceProvider"
             ],
             "aliases": {
-                "JokesFactory": "Zonec\\Base\\Facades\\JokesFactoryFacade"
+                "JokesFactory": "Zonec\\Base\\Facades\\JokesFactory"
             }
         }
     }

@@ -6,12 +6,70 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Handler\MockHandler;
+use Illuminate\Foundation\Testing\TestCase;
 
 /**
  *  JokesFactory test
  */
-class JokesFactoryTest extends \PHPUnit\Framework\TestCase
+class JokesFactoryTest extends TestCase
 {
+
+    use \Tests\CreatesApplication;
+    use \Illuminate\Foundation\Testing\DatabaseTransactions;
+
+    /** @test */
+    public function it_tests_default_random_joke_route()
+    {
+        $this->withoutExceptionHandling();
+
+        // Comment below if you DONT want to mock api call
+        \Zonec\Base\Facades\JokesFactory::shouldReceive("getRandomJoke")
+        ->once()
+        ->andReturn('some joke');
+
+
+        $this->get("/random-joke")
+            ->assertViewIs("jokes-views::joke")
+            ->assertViewHas("jokeKey")
+            ->assertStatus(200);
+    }
+
+    /** @test */
+    public function it_displays_a_joke_when_command_called()
+    {
+        // mock
+        \Zonec\Base\Facades\JokesFactory::shouldReceive("getRandomJoke")
+        ->once()
+        ->andReturn('some joke');
+
+        $this->artisan('jokes:factory')
+         // ->expectsQuestion('What is your name?', 'Taylor Otwell')
+         // ->expectsQuestion('Which language do you program in?', 'PHP')
+         ->expectsOutput('some joke')
+         ->assertExitCode(0);
+    }
+
+    /** @test */
+    public function it_can_access_the_database()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->artisan('jokes:migrate')
+            ->assertExitCode(0);
+
+        $jokeStr = "What's the difference between an errection and a ferrari?";
+
+        $jokeModel = new \Zonec\Base\Joke();
+
+        $jokeModel->joke = $jokeStr;
+
+        $jokeModel->save();
+
+        $newJoke = \Zonec\Base\Joke::find($jokeModel->id);
+
+        $this->assertSame($newJoke->joke, $jokeStr);
+    }
+
     /** @test */
     function it_returns_a_random_joke()
     {
@@ -40,4 +98,3 @@ class JokesFactoryTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($randomJoke, $theJoke);
     }
 }
-?>
